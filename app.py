@@ -1,6 +1,7 @@
 from flask import Flask
 import requests
 import os
+from controllers.calendar import Calendar
 
 app = Flask(__name__)
 
@@ -55,7 +56,6 @@ def getcal():
     if schedule_response.status_code != 200:
         return {"error": "Schedule request failed", "details": schedule_response.text}, schedule_response.status_code
 
-    from controllers.calendar import Calendar
     calendar = Calendar()
     return calendar.get(schedule_response.json())
 

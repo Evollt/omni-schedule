@@ -1,5 +1,6 @@
 import uuid
 from datetime import datetime
+from controllers.date import Date
 
 class Calendar:
     def __init__(self):
@@ -13,8 +14,8 @@ class Calendar:
         for key in body:
             for innerKey in body[key]:
                 item = body[key][innerKey]
-                start_formatted = dates[innerKey].replace("-", "") + "T" + item['l_start'].replace(":", "") + "00Z"
-                end_formatted = dates[innerKey].replace("-", "") + "T" + item['l_end'].replace(":", "") + "00Z"
+                start_formatted = Date.get_start_and_end_time(dates[innerKey], item['l_start'])
+                end_formatted = Date.get_start_and_end_time(dates[innerKey], item['l_end'])
                 uid = f"evt-{uuid.uuid4()}"
 
                 result.append(f"""
