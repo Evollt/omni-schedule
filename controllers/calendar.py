@@ -21,7 +21,7 @@ class Calendar:
                 result.append(f"""
 BEGIN:VEVENT
 SUMMARY:{item['name_spec']}
-DESCRIPTION:Группа - {item['groups']}, Кабинет - {item['num_rooms']}
+DESCRIPTION:Группа - {item['groups']}, Кабинет - {item['num_rooms']}. Ссылка на omni: https://omni.top-academy.ru/#/presents
 DTSTART:{start_formatted}
 DTEND:{end_formatted}
 UID:{uid}
