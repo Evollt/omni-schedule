@@ -4,10 +4,13 @@ FROM python:3.11
 # Устанавливаем рабочую директорию в контейнере
 WORKDIR /app
 
-# Устанавливаем русскую локаль
+# Устанавливаем русскую локаль без update-locale
+ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y locales \
     && locale-gen ru_RU.UTF-8 \
-    && update-locale LANG=ru_RU.UTF-8
+    && rm -rf /var/lib/apt/lists/*
+
+# Устанавливаем переменные окружения для контейнера
 ENV LANG=ru_RU.UTF-8
 ENV LANGUAGE=ru_RU:ru
 ENV LC_ALL=ru_RU.UTF-8
