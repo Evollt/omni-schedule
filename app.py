@@ -83,7 +83,8 @@ def generate_act():
     doc = Document()
     save_path = doc.create_act(context, month)
 
-    download_url = f"{os.getenv("APP_URL")}/download/{save_path.name}"
+    download_url = f"{os.getenv('APP_URL')}/download/{save_path.name}"
+
 
     return {
         "success": True,
