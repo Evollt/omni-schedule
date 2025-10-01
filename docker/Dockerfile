@@ -1,16 +1,17 @@
-# Используем официальный образ Python
-FROM python:3.11
+# Используем полный образ Debian с Python
+FROM python:3.11-bullseye
 
-# Устанавливаем рабочую директорию в контейнере
+# Рабочая директория
 WORKDIR /app
 
-# Устанавливаем русскую локаль без update-locale
+# Устанавливаем русскую локаль
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y locales \
+    && echo "ru_RU.UTF-8 UTF-8" > /etc/locale.gen \
     && locale-gen ru_RU.UTF-8 \
     && rm -rf /var/lib/apt/lists/*
 
-# Устанавливаем переменные окружения для контейнера
+# Переменные окружения для русской локали
 ENV LANG=ru_RU.UTF-8
 ENV LANGUAGE=ru_RU:ru
 ENV LC_ALL=ru_RU.UTF-8
@@ -26,8 +27,8 @@ RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt \
     --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org
 
-# Открываем порт, на котором работает Flask
+# Открываем порт
 EXPOSE 5001
 
-# Запускаем приложение
+# Запуск приложения
 CMD ["python", "app.py"]
