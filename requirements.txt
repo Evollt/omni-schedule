@@ -3,3 +3,4 @@ requests
 gunicorn
 pytz
 python-docx
+num2words
